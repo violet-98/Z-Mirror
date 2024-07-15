@@ -90,7 +90,6 @@ jobs:
       run: |
         java -jar smali/baksmali/build/libs/baksmali.jar d -a ${{ github.event.inputs.android_api_level }} services/classes.dex -o services_classes
         java -jar smali/baksmali/build/libs/baksmali.jar d -a ${{ github.event.inputs.android_api_level }} services/classes2.dex -o services_classes2
-        java -jar smali/baksmali/build/libs/baksmali.jar d -a ${{ github.event.inputs.android_api_level }} services/classes3.dex -o services_classes3
 
     - name: List decompiled files for debugging
       run: |
@@ -105,8 +104,6 @@ jobs:
         find services_classes
         echo "Contents of services_classes2 directory:"
         find services_classes2
-        echo "Contents of services_classes3 directory:"
-        find services_classes3
 
     - name: Backup smali files
       run: |
@@ -117,7 +114,6 @@ jobs:
         fi
         cp -r services_classes services_classes_backup
         cp -r services_classes2 services_classes2_backup
-        cp -r services_classes3 services_classes3_backup
 
     - name: Modify framework smali files
       run: |
@@ -150,7 +146,6 @@ jobs:
       run: |
         java -jar smali/smali/build/libs/smali.jar a -a ${{ github.event.inputs.android_api_level }} services_classes -o services/classes.dex
         java -jar smali/smali/build/libs/smali.jar a -a ${{ github.event.inputs.android_api_level }} services_classes2 -o services/classes2.dex
-        java -jar smali/smali/build/libs/smali.jar a -a ${{ github.event.inputs.android_api_level }} services_classes3 -o services/classes3.dex
 
     - name: Recompile framework.jar
       run: |
